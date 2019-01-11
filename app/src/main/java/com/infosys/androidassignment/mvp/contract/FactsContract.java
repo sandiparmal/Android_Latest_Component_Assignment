@@ -2,6 +2,7 @@ package com.infosys.androidassignment.mvp.contract;
 
 import com.infosys.androidassignment.mvp.base.BasePresenter;
 import com.infosys.androidassignment.mvp.base.BaseView;
+import com.infosys.androidassignment.network.data.FactsResponse;
 
 public class FactsContract {
 
@@ -25,6 +26,6 @@ public class FactsContract {
          *
          * @param extendedURL String
          */
-        void fetchCountryDetails(String extendedURL);
+        void factsFetchCall(String extendedURL);
     }
 }

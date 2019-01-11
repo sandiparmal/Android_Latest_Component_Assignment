@@ -3,6 +3,7 @@ package com.infosys.androidassignment.mvp.presenter;
 
 import com.infosys.androidassignment.mvp.contract.FactsContract;
 import com.infosys.androidassignment.mvp.model.FactsInteractor;
+import com.infosys.androidassignment.network.data.FactsResponse;
 
 public class FactsPresenterImpl implements FactsContract.FactsPresenter, FactsInteractor.OnFetchFinishListener {
 
@@ -21,7 +22,7 @@ public class FactsPresenterImpl implements FactsContract.FactsPresenter, FactsIn
      * @param extendedURL String
      */
     @Override
-    public void fetchCountryDetails(String extendedURL) {
+    public void factsFetchCall(String extendedURL) {
         // show progress bar
         factsView.showWait();
         // call interactor to fetch country details
@@ -31,13 +32,13 @@ public class FactsPresenterImpl implements FactsContract.FactsPresenter, FactsIn
     /**
      * Trigger when country details fetching success
      *
-     * @param countryResponse countryResponse
+     * @param factsResponse countryResponse
      */
     @Override
-    public void onFetchingSuccess(FactsResponse countryResponse) {
+    public void onFetchingSuccess(FactsResponse factsResponse) {
         if(factsView != null){
             factsView.hideWait();
-            factsView.onResponse(countryResponse);
+            factsView.onResponse(factsResponse);
         }
     }
 

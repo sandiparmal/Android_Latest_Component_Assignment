@@ -1,5 +1,7 @@
 package com.infosys.androidassignment.mvp.model;
 
+import com.infosys.androidassignment.network.data.FactsResponse;
+
 public interface FactsInteractor {
 
     /**
