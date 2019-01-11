@@ -1,13 +1,29 @@
 package com.infosys.androidassignment;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class MainActivity extends AppCompatActivity {
+import com.infosys.androidassignment.mvp.base.BaseActivity;
 
+public class MainActivity extends BaseActivity {
+
+
+    /**
+     * Layout resource to be inflated
+     *
+     * @return layout resource
+     */
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+    protected int getContentResource() {
+        return 0;
+    }
+
+    /**
+     * Initializations
+     *
+     * @param savedState Bundle
+     */
+    @Override
+    protected void init(Bundle savedState) {
+
     }
 }
