@@ -54,8 +54,8 @@
 
             <ImageView
                 android:id="@+id/image"
-                android:layout_width="100dip"
-                android:layout_height="100dip"
+                android:layout_width="@dimen/imageView_width"
+                android:layout_height="@dimen/imageView_height"
                 android:scaleType="fitXY"
                 tools:ignore="ContentDescription" />
 

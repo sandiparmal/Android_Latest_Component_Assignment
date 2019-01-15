@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Android Assignment</string>
+    <string name="network_error">Network is not Available</string>
+    <string name="fetch_failed_message">Failed to fetch response</string>
 </resources>

@@ -9,4 +9,6 @@
     <dimen name="description_text_size_7_tablet">20sp</dimen>
     <dimen name="left_right_margin_tablet">16dip</dimen>
     <dimen name="top_bottom_margin_tablet">10dip</dimen>
+    <dimen name="imageView_width">100dip</dimen>
+    <dimen name="imageView_height">100dip</dimen>
 </resources>

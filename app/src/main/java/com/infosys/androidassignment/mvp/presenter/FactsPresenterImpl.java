@@ -25,14 +25,14 @@ public class FactsPresenterImpl implements FactsContract.FactsPresenter, FactsIn
     public void factsFetchCall(String extendedURL) {
         // show progress bar
         factsView.showWait();
-        // call interactor to fetch country details
+        // call interactor to fetch facts details
         factsInteractor.fetchFactsDetails(extendedURL, this);
     }
 
     /**
-     * Trigger when country details fetching success
+     * Trigger when facts details fetching success
      *
-     * @param factsResponse countryResponse
+     * @param factsResponse FactsResponse
      */
     @Override
     public void onFetchingSuccess(FactsResponse factsResponse) {
@@ -43,7 +43,7 @@ public class FactsPresenterImpl implements FactsContract.FactsPresenter, FactsIn
     }
 
     /**
-     * Trigger when country details fetching failure
+     * Trigger when facts details fetching failure
      *
      * @param message String
      */
