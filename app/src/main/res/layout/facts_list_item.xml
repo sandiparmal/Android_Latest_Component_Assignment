@@ -25,7 +25,7 @@
             android:layout_marginTop="@dimen/top_bottom_margin"
             android:layout_marginBottom="@dimen/top_bottom_margin"
             android:text=""
-            android:textColor="@color/color_title"
+            android:textColor="@color/colorPrimaryDark"
             android:textSize="@dimen/title_text_size"
             android:textStyle="bold" />
 

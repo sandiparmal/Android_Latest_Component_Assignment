@@ -2,10 +2,10 @@
 package com.infosys.androidassignment.adapters;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,11 +27,14 @@ import butterknife.ButterKnife;
 public class FactsRecyclerAdapter extends RecyclerView.Adapter<FactsRecyclerAdapter.FactsHolder> {
     private ArrayList<Facts> factsDetailsList;
     private Context context;
-    private static final String TAG = "FactsRecyclerAdapter";
+    private Typeface boldTypeface;
+    private Typeface regularTypeface;
 
     public FactsRecyclerAdapter(Context context, ArrayList<Facts> factsDetailsList) {
         this.factsDetailsList = factsDetailsList;
         this.context = context;
+        boldTypeface = Typeface.createFromAsset(context.getAssets(), "fonts/Vollkorn-Bold.ttf");
+        regularTypeface = Typeface.createFromAsset(context.getAssets(), "fonts/Vollkorn-Regular.ttf");
     }
 
     @NonNull
@@ -120,6 +123,7 @@ public class FactsRecyclerAdapter extends RecyclerView.Adapter<FactsRecyclerAdap
                 mTvTitle.setVisibility(View.GONE);
             } else {
                 mTvTitle.setText(facts.getTitle());
+                mTvTitle.setTypeface(boldTypeface);
             }
 
             // check if description is null
@@ -127,6 +131,7 @@ public class FactsRecyclerAdapter extends RecyclerView.Adapter<FactsRecyclerAdap
                 mTvDescription.setVisibility(View.GONE);
             } else {
                 mTvDescription.setText(facts.getDescription());
+                mTvDescription.setTypeface(regularTypeface);
             }
 
         }
