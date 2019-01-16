@@ -11,7 +11,7 @@ public interface NetworkService {
 
     // retrofit get call
     @GET(Constants.FACTS_URL)
-    Observable<FactsResponse> getCountryDetails();
+    Observable<FactsResponse> getFactsDetails();
 
 
 }

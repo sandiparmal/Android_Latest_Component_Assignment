@@ -11,7 +11,7 @@ public class FactsContract {
         /**
          * Update the list items in list view through adapter
          */
-        void onResponse(FactsResponse countryResponse);
+        void onResponse(FactsResponse factsResponse);
 
         /**
          * Show toast on data fetching failure

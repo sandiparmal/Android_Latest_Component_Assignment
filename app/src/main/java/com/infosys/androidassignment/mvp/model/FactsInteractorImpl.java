@@ -32,14 +32,14 @@ public class FactsInteractorImpl implements FactsInteractor {
             //configure Retrofit using Retrofit Builder
             NetworkService networkService = App.getClient(URL).create(NetworkService.class);
 
-            mCompositeDisposable.add(networkService.getCountryDetails()
+            mCompositeDisposable.add(networkService.getFactsDetails()
                     .subscribeOn(Schedulers.io()) // “work” on io thread
                     .observeOn(AndroidSchedulers.mainThread()) // “listen” on UIThread
                     .map(new Function<FactsResponse, FactsResponse>() {
                         @Override
                         public FactsResponse apply(
                                 @io.reactivex.annotations.NonNull final FactsResponse factsResponse) throws Exception {
-                            // we want to have the country and not the wrapper object
+                            // we want to have the facts and not the wrapper object
                             return factsResponse;
                         }
                     })

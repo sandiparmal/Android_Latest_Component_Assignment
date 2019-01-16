@@ -2,7 +2,7 @@ package com.infosys.androidassignment.mvp.base;
 
 import com.infosys.androidassignment.mvp.contract.FactsContract;
 
-public interface BasePresenter<CountryView> {
+public interface BasePresenter<FactsView> {
 
     /**
      * Called when the view is created and wants to attach its presenter

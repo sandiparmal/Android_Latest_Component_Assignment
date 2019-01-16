@@ -25,4 +25,7 @@ public class Facts {
         return imageHref;
     }
 
+    public void setImageHref(String imageHref) {
+        this.imageHref = imageHref;
+    }
 }

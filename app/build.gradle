@@ -1,22 +1,84 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+    }
     compileSdkVersion 28
-    defaultConfig {
-        applicationId "com.infosys.androidassignment"
-        minSdkVersion 14
-        targetSdkVersion 28
-        versionCode 1
-        versionName "1.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    def versionPropsFile = file('version.properties')
+    if (versionPropsFile.canRead()) {
+        Properties versionProps = new Properties()
+
+        versionProps.load(new FileInputStream(versionPropsFile))
+
+        def value = 0
+
+        List<String> runTasks = gradle.startParameter.getTaskNames();
+
+        def versionMajor = 1
+        def versionMinor = 0
+        for (String item : runTasks) {
+            if (item.contains("assemble") && item.contains("Release")) {
+                value = 1
+            }
+        }
+
+        def versionPatch = versionProps['VERSION_PATCH'].toInteger() + value
+        def versionBuild = versionProps['VERSION_BUILD'].toInteger() + 1
+        def versionNumber = versionProps['VERSION_CODE'].toInteger() + value
+
+        versionProps['VERSION_PATCH'] = versionPatch.toString()
+        versionProps['VERSION_BUILD'] = versionBuild.toString()
+        versionProps['VERSION_CODE'] = versionNumber.toString()
+
+        versionProps.store(versionPropsFile.newWriter(), null)
+
+        defaultConfig {
+            applicationId "infosys.com.androidassignment"
+            minSdkVersion rootProject.ext.minSdkVersion
+            targetSdkVersion rootProject.ext.targetSdkVersion
+            versionCode versionNumber
+            versionName "${versionMajor}.${versionMinor}.${versionNumber}.${versionPatch} (${versionBuild}) Release"
+            testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        }
+
+
+        android.applicationVariants.all { variant ->
+            variant.outputs.all {
+                outputFileName = "${versionName}-Android_Assignment.apk"
+            }
+        }
+    } else {
+        throw new GradleException("Could not read version.properties!")
+    }
+    signingConfigs {
+        release {
+            keyAlias 'android'
+            keyPassword 'android'
+            storeFile file('../app/release/android_assignment.keystore')
+            storePassword 'android'
+        }
     }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig getSigningConfig()
+
+        }
+        debug {
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig getSigningConfig()
+
         }
     }
+
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
+
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
@@ -43,7 +105,21 @@ dependencies {
     implementation "com.squareup.retrofit2:converter-gson:$rootProject.retrofit2Version"
 
     annotationProcessor "com.jakewharton:butterknife-compiler:$rootProject.butterKnifeVersion"
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.2'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+
+    // Testing-only dependencies
+    androidTestImplementation "com.android.support.test.espresso:espresso-core:$rootProject.espressoVersion"
+    androidTestImplementation "com.android.support.test.espresso:espresso-contrib:$rootProject.espressoVersion"
+
+    // dependencies for local unit tests
+    testImplementation "junit:junit:$rootProject.ext.junitVersion"
+
+    // Testing-only dependencies
+    androidTestImplementation "com.android.support.test:runner:$rootProject.runnerVersion"
+    androidTestImplementation "com.android.support.test:rules:$rootProject.rulesVersion"
+    androidTestImplementation "com.linkedin.dexmaker:dexmaker-mockito:$rootProject.dexmakerMockito"
+
+    // Force usage of dependencies in the test app, since it is internally used by the runner module.
+    androidTestImplementation "com.android.support:support-annotations:$rootProject.supportLibraryVersion"
+    androidTestImplementation "org.mockito:mockito-core:$rootProject.mockitoVersion"
+
 }

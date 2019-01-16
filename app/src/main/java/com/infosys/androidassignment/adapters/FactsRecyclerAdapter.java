@@ -60,7 +60,7 @@ public class FactsRecyclerAdapter extends RecyclerView.Adapter<FactsRecyclerAdap
         return factsDetailsList.size();
     }
 
-    protected class FactsHolder extends RecyclerView.ViewHolder {
+    public class FactsHolder extends RecyclerView.ViewHolder {
 
         // bind views using ButterKnife
         @BindView(R.id.title)
@@ -73,6 +73,9 @@ public class FactsRecyclerAdapter extends RecyclerView.Adapter<FactsRecyclerAdap
         ProgressBar loadingProgressBar;
         private View itemView;
 
+        // We'll use this field to showcase matching the holder from the test.
+        private boolean mIsInTheMiddle = false;
+
         private FactsHolder(View itemView) {
             super(itemView);
 
@@ -80,6 +83,15 @@ public class FactsRecyclerAdapter extends RecyclerView.Adapter<FactsRecyclerAdap
             ButterKnife.bind(this, itemView);
             this.itemView = itemView;
         }
+
+        public boolean getIsInTheMiddle() {
+            return mIsInTheMiddle;
+        }
+
+        void setIsInTheMiddle(boolean isInTheMiddle) {
+            mIsInTheMiddle = isInTheMiddle;
+        }
+
         private void bindData(Facts facts) {
 
             // check if title, description and image url is null

@@ -2,4 +2,6 @@
     <string name="app_name">Android Assignment</string>
     <string name="network_error">Network is not Available</string>
     <string name="fetch_failed_message">Failed to fetch response</string>
+    <string name="item_element_text">Hockey Night in Canada</string>
+    <string name="middle">Public Shame</string>
 </resources>
